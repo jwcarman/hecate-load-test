@@ -87,6 +87,10 @@
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>cassandra-maven-plugin</artifactId>
                 <version>2.0.0-1</version>
+                <configuration>
+                    <startNativeTransport>true</startNativeTransport>
+                    <nativeTransportPort>9142</nativeTransportPort>
+                </configuration>
                 <executions>
                     <execution>
                         <id>start-cassandra</id>
@@ -129,6 +133,7 @@
                             </properties>
                         </deployable>
                     </deployables>
+
                 </configuration>
                 <executions>
                     <execution>

@@ -15,5 +15,4 @@
         </jaxrs:serviceBeans>
     </jaxrs:server>
 
-
 </beans>

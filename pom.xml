@@ -20,6 +20,7 @@
     <gatling.plugin.version>2.1.5</gatling.plugin.version>
     <scala.plugin.version>2.15.2</scala.plugin.version>
     <spring.version>4.1.6.RELEASE</spring.version>
+    <slf4j.version>1.7.12</slf4j.version>
   </properties>
 
   <modules>

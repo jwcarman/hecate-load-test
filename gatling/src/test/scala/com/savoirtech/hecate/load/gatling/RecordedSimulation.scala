@@ -14,13 +14,13 @@ class RecordedSimulation extends Simulation {
     .acceptHeader("text/plain")
     .acceptEncodingHeader("gzip, deflate, sdch")
 
-  val repeat = System.getProperty("repeat", "100")
-  val users = System.getProperty("users", "10")
+  val repeat = System.getProperty("repeat", "1000")
+  val users = System.getProperty("users", "500")
   val duration = System.getProperty("duration", "10")
 
   val scn = scenario("hello").repeat(repeat.toInt) {
     exec(http("request_0")
-      .get("/services/hello/jcarman"))
+      .get("/services/hello/jcarman").check(status.is(200)).check(bodyString.is("Hello, Jim!")))
   }
 
 
