@@ -16,7 +16,7 @@ class RecordedSimulation extends Simulation {
 
   val repeat = System.getProperty("repeat", "1000")
   val users = System.getProperty("users", "500")
-  val duration = System.getProperty("duration", "10")
+  val duration = System.getProperty("duration", "60")
 
   val scn = scenario("hello").repeat(repeat.toInt) {
     exec(http("request_0")
