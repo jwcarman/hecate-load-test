@@ -14,12 +14,10 @@
         <dependency>
             <groupId>com.savoirtech.hecate</groupId>
             <artifactId>hecate-annotation</artifactId>
-            <version>${hecate.version}</version>
         </dependency>
         <dependency>
             <groupId>com.savoirtech.hecate</groupId>
             <artifactId>hecate-pojo</artifactId>
-            <version>${hecate.version}</version>
         </dependency>
         <dependency>
             <groupId>org.slf4j</groupId>
