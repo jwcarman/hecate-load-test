@@ -3,7 +3,9 @@ package com.savoirtech.hecate.load.web.config;
 import com.codahale.metrics.JmxReporter;
 import com.datastax.driver.core.Cluster;
 import com.datastax.driver.core.Session;
+import com.datastax.driver.core.schemabuilder.Create;
 import com.savoirtech.hecate.core.metrics.HecateMetrics;
+import com.savoirtech.hecate.load.web.domain.Person;
 import com.savoirtech.hecate.pojo.dao.PojoDaoFactory;
 import com.savoirtech.hecate.pojo.dao.def.DefaultPojoDaoFactory;
 import org.slf4j.Logger;
@@ -26,6 +28,9 @@ public class HecateConfig {
         session.close();
         JmxReporter.forRegistry(HecateMetrics.REGISTRY).inDomain("hecate").build().start();
         session = cluster.connect(KEYSPACE_NAME);
-        return new DefaultPojoDaoFactory(session);
+        DefaultPojoDaoFactory daoFactory = new DefaultPojoDaoFactory(session);
+        Create create = daoFactory.getBindingFactory().createPojoBinding(Person.class).createTable("person");
+        session.execute(create);
+        return daoFactory;
     }
 }
