@@ -13,8 +13,8 @@
 
         <cassandra.version>2.1.5</cassandra.version>
         <cxf.version>3.0.4</cxf.version>
-        <gatling.version>2.1.5</gatling.version>
-        <hecate.version>2.0.0</hecate.version>
+        <gatling.version>2.1.7</gatling.version>
+        <hecate.version>3.0.0-SNAPSHOT</hecate.version>
         <scala.version>2.11.6</scala.version>
 
         <gatling.plugin.version>2.1.5</gatling.plugin.version>

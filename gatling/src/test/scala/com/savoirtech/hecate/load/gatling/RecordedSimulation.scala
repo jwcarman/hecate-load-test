@@ -9,18 +9,18 @@ import scala.language.postfixOps
 class RecordedSimulation extends Simulation {
 
   val httpProtocol = http
-    .baseURL("http://localhost:9999")
+    .baseURL("http://localhost:8888")
     .inferHtmlResources()
     .acceptHeader("text/plain")
     .acceptEncodingHeader("gzip, deflate, sdch")
 
   val repeat = System.getProperty("repeat", "1000")
   val users = System.getProperty("users", "500")
-  val duration = System.getProperty("duration", "60")
+  val duration = System.getProperty("duration", "10")
 
-  val scn = scenario("hello").repeat(repeat.toInt) {
+  val scn = scenario("foo").repeat(repeat.toInt) {
     exec(http("request_0")
-      .get("/services/hello/jcarman").check(status.is(200)).check(bodyString.is("Hello, Jim!")))
+      .get("/").check(status.is(200)).check(bodyString.is("Hello, World!")))
   }
 
 

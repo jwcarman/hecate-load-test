@@ -1,13 +1,13 @@
 package com.savoirtech.hecate.load.web.domain;
 
-import com.savoirtech.hecate.annotation.Id;
+import com.savoirtech.hecate.annotation.PartitionKey;
 
 public class Person {
 //----------------------------------------------------------------------------------------------------------------------
 // Fields
 //----------------------------------------------------------------------------------------------------------------------
 
-    @Id 
+    @PartitionKey
     private String id;
     
     private String firstName;

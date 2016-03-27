@@ -6,7 +6,6 @@ import com.datastax.driver.core.Session;
 import com.savoirtech.hecate.core.metrics.HecateMetrics;
 import com.savoirtech.hecate.pojo.dao.PojoDaoFactory;
 import com.savoirtech.hecate.pojo.dao.def.DefaultPojoDaoFactory;
-import com.savoirtech.hecate.pojo.mapping.verify.CreateSchemaVerifier;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.Bean;
@@ -27,6 +26,6 @@ public class HecateConfig {
         session.close();
         JmxReporter.forRegistry(HecateMetrics.REGISTRY).inDomain("hecate").build().start();
         session = cluster.connect(KEYSPACE_NAME);
-        return new DefaultPojoDaoFactory(session, new CreateSchemaVerifier(session));
+        return new DefaultPojoDaoFactory(session);
     }
 }
