@@ -10,7 +10,8 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
         <cassandra.version>2.1.5</cassandra.version>
         <cxf.version>3.0.4</cxf.version>
         <gatling.version>2.1.7</gatling.version>

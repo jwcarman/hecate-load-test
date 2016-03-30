@@ -1,10 +1,7 @@
 package com.savoirtech.hecate.load.web.config;
 
-import java.util.List;
-
 import com.datastax.driver.core.Cluster;
 import com.datastax.driver.core.Session;
-import com.datastax.driver.core.schemabuilder.Create;
 import com.savoirtech.hecate.load.web.domain.Person;
 import com.savoirtech.hecate.pojo.binding.PojoBindingFactory;
 import com.savoirtech.hecate.pojo.binding.def.DefaultPojoBindingFactory;
@@ -43,10 +40,7 @@ public class HecateConfig {
         DefaultNamingStrategy namingStrategy = new DefaultNamingStrategy();
         PojoBindingFactory bindingFactory = new DefaultPojoBindingFactory(new FieldFacetProvider(), new DefaultConverterRegistry(), namingStrategy);
         DefaultPojoDaoFactory daoFactory = new DefaultPojoDaoFactoryBuilder(session).withBindingFactory(bindingFactory).withNamingStrategy(namingStrategy).build();
-        List<Create> creates = bindingFactory.createPojoBinding(Person.class).describe("person");
-        for (Create create : creates) {
-            session.execute(create);
-        }
+        bindingFactory.createPojoBinding(Person.class).describe("person").forEach(session::execute);
         return daoFactory;
     }
 }
