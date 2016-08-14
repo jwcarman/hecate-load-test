@@ -2,13 +2,12 @@ package com.savoirtech.hecate.load.web.config;
 
 import com.datastax.driver.core.Cluster;
 import com.datastax.driver.core.Session;
-import com.savoirtech.hecate.load.web.domain.Person;
 import com.savoirtech.hecate.pojo.binding.PojoBindingFactory;
 import com.savoirtech.hecate.pojo.binding.def.DefaultPojoBindingFactory;
 import com.savoirtech.hecate.pojo.convert.def.DefaultConverterRegistry;
 import com.savoirtech.hecate.pojo.dao.PojoDaoFactory;
-import com.savoirtech.hecate.pojo.dao.def.DefaultPojoDaoFactory;
 import com.savoirtech.hecate.pojo.dao.def.DefaultPojoDaoFactoryBuilder;
+import com.savoirtech.hecate.pojo.dao.listener.CreateSchemaListener;
 import com.savoirtech.hecate.pojo.facet.field.FieldFacetProvider;
 import com.savoirtech.hecate.pojo.naming.def.DefaultNamingStrategy;
 import org.slf4j.Logger;
@@ -39,8 +38,6 @@ public class HecateConfig {
         session = cluster.connect(KEYSPACE_NAME);
         DefaultNamingStrategy namingStrategy = new DefaultNamingStrategy();
         PojoBindingFactory bindingFactory = new DefaultPojoBindingFactory(new FieldFacetProvider(), new DefaultConverterRegistry(), namingStrategy);
-        DefaultPojoDaoFactory daoFactory = new DefaultPojoDaoFactoryBuilder(session).withBindingFactory(bindingFactory).withNamingStrategy(namingStrategy).build();
-        bindingFactory.createPojoBinding(Person.class).describe("person").forEach(session::execute);
-        return daoFactory;
+        return new DefaultPojoDaoFactoryBuilder(session).withBindingFactory(bindingFactory).withNamingStrategy(namingStrategy).withListener(new CreateSchemaListener(session)).build();
     }
 }
